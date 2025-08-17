@@ -32,6 +32,20 @@ export default function Home() {
       ],
     },
     {
+      title: "BountyBlocks",
+      role: "Co‑creator",
+      period: "ETHGlobal NYC 2025",
+      href: "https://ethglobal.com/showcase/bountyblocks-tjjv6",
+      description:
+        "Verifiable bug bounty ledger with token‑agnostic payouts and an auditable workflow built at ETHGlobal NYC.",
+      highlights: [
+        "Token‑agnostic payouts via on‑chain swaps",
+        "Automated quotes, routing, and slippage handling",
+        "Transparent, auditable bounty records",
+      ],
+      tech: ["web3", "Flow Actions", "Cadence", "Walrus", "Next.js", "On‑chain swaps"],
+    },
+    {
       title: "Fake Estate",
       role: "Lead Developer",
       period: "Spring 2024",
@@ -178,7 +192,7 @@ export default function Home() {
         <section className="flex flex-col items-start gap-6">
           <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/40 px-3 py-1 text-xs text-zinc-700 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-zinc-300">
             <span className="inline-block h-2 w-2 rounded-full bg-emerald-500/90 ring-2 ring-emerald-500/30" />
-            Status: Building at ETHGlobal NYC
+            Status: Building P.S.
           </div>
 
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl">
