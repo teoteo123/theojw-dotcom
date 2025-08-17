@@ -217,8 +217,7 @@ export default function Home() {
                 Education
               </div>
               <p className="text-pretty text-base text-zinc-600 sm:text-lg dark:text-zinc-300">
-                Virginia Tech — B.S. Computer Science (2022–Present). Dean’s
-                List.
+                Virginia Tech — B.S. Computer Science (Class of 2026)
               </p>
             </div>
             <div>
