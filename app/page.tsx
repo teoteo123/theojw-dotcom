@@ -22,14 +22,7 @@ export default function Home() {
         "AI-in-the-loop data labeling & product generation",
         "Shopify product creation, printing, and fulfillment",
       ],
-      tech: [
-        "Next.js",
-        "TypeScript",
-        "Agents",
-        "GraphQL",
-        "AWS",
-        "Terraform",
-      ],
+      tech: ["Next.js", "TypeScript", "Agents", "GraphQL", "AWS", "Terraform"],
     },
     {
       title: "BountyBlocks",
@@ -43,7 +36,14 @@ export default function Home() {
         "Automated quotes, routing, and slippage handling",
         "Transparent, auditable bounty records",
       ],
-      tech: ["web3", "Flow Actions", "Cadence", "Walrus", "Next.js", "On‑chain swaps"],
+      tech: [
+        "web3",
+        "Flow Actions",
+        "Cadence",
+        "Walrus",
+        "Next.js",
+        "On‑chain swaps",
+      ],
     },
     {
       title: "Fake Estate",
@@ -175,7 +175,17 @@ export default function Home() {
         "Built apps on private blockchains using Noir and Leo",
         "Studied cryptographic signing schemes and ZK proving",
       ],
-      tech: ["web3", "ZKPs", "Aztec", "Aleo", "Next.js", "DSLs", "ethers", "hardhat", "Solidity"],
+      tech: [
+        "web3",
+        "ZKPs",
+        "Aztec",
+        "Aleo",
+        "Next.js",
+        "DSLs",
+        "ethers",
+        "hardhat",
+        "Solidity",
+      ],
     },
   ];
 
@@ -207,7 +217,8 @@ export default function Home() {
                 Education
               </div>
               <p className="text-pretty text-base text-zinc-600 sm:text-lg dark:text-zinc-300">
-                Virginia Tech — B.S. Computer Science (2022–Present). Dean’s List.
+                Virginia Tech — B.S. Computer Science (2022–Present). Dean’s
+                List.
               </p>
             </div>
             <div>
@@ -220,9 +231,13 @@ export default function Home() {
             </div>
             <div className="h-px w-24 bg-gradient-to-r from-violet-400/60 to-transparent" />
             <p className="text-pretty text-base text-zinc-600 sm:text-lg dark:text-zinc-300">
-              I like to build GenAI experiences that feel effortless, high‑signal internal tools, and end‑to‑end
-              systems that connect data preparation, AI, and fulfillment. Favorite stack: Next.js + TypeScript,
-              AWS, Terraform, Kafka, GraphQL — shipped with performance, reliability, and clean UX.
+              I like to build <br />- Effortless GenAI user experiences
+              <br />- High-signal internal tools
+              <br />- End-to-end systems that connect data preparation, AI, and
+              fulfillment.
+              <br />
+              <br />
+              Shipped with reliability, clean UX, and good docs.
             </p>
           </div>
 
