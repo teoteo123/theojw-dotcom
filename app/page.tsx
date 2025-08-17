@@ -60,8 +60,8 @@ export default function Home() {
       period: "Winter 2023/24",
       description:
         "Electron desktop app that automates Ticketmaster checkout with thread‑pooled concurrency and queue handling.",
-      highlights: ["Queue automation", "Parallel purchases"],
-      tech: ["Electron", "Node.js", "TypeScript"],
+      highlights: ["Web automation", "Desktop applications"],
+      tech: ["Electron", "Node.js", "TypeScript", "Python"],
     },
     {
       title: "Quikmint",
