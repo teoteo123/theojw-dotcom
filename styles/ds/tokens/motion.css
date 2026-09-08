@@ -1,0 +1,18 @@
+/* ── Theo Wallace · Motion ─────────────────────────────────────────────
+   Everything is a fade, a short translate, or a color change. No bounce,
+   no spring, no scale-up entrances, no parallax. */
+:root{
+  --dur-instant:90ms;
+  --dur-fast:140ms;
+  --dur-base:200ms;
+  --dur-slow:320ms;
+  --dur-reveal:520ms;
+
+  --ease-out:cubic-bezier(.22,.8,.28,1);
+  --ease-in-out:cubic-bezier(.5,0,.2,1);
+  --ease-entrance:cubic-bezier(.16,.84,.28,1);
+
+  --transition-color:color var(--dur-fast) var(--ease-out),background-color var(--dur-fast) var(--ease-out),border-color var(--dur-fast) var(--ease-out);
+  --transition-control:var(--transition-color),box-shadow var(--dur-fast) var(--ease-out),transform var(--dur-instant) var(--ease-out);
+  --reveal-distance:14px;
+}

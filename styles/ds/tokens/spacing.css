@@ -1,0 +1,29 @@
+/* ── Theo Wallace · Spacing & layout ───────────────────────────────────
+   4px base. Named by step, not by t-shirt size, so the scale can extend. */
+
+:root{
+  --space-0:0;
+  --space-1:2px;--space-2:4px;--space-3:6px;--space-4:8px;--space-5:12px;
+  --space-6:16px;--space-7:20px;--space-8:24px;--space-9:32px;--space-10:40px;
+  --space-11:56px;--space-12:72px;--space-13:96px;--space-14:128px;--space-15:160px;--space-16:200px;
+
+  /* Vertical rhythm of a marketing page */
+  --section-y:var(--space-13);
+  --section-y-tight:var(--space-11);
+  --section-y-loose:var(--space-15);
+
+  /* Horizontal frame */
+  --container-max:1240px;
+  --container-prose:720px;
+  --gutter:var(--space-8);
+  --gutter-lg:var(--space-10);
+
+  /* Control sizing — one source of truth for buttons, inputs, selects */
+  --control-h-sm:32px;
+  --control-h-md:40px;
+  --control-h-lg:48px;
+  --control-px-sm:var(--space-5);
+  --control-px-md:var(--space-7);
+  --control-px-lg:var(--space-8);
+  --control-gap:var(--space-4);
+}
