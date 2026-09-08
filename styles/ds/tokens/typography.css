@@ -1,0 +1,54 @@
+/* ── Theo Wallace · Typography ──────────────────────────────────────────
+   Two families, clear division of labour:
+   core  Schibsted Grotesk — display, headings, body, UI. One family, many weights.
+   mono  IBM Plex Mono     — eyebrows, metadata, figures, code, table headers.
+   Mono is a signal, not decoration: it marks machine-legible content. */
+
+:root{
+  --font-core:"Schibsted Grotesk","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-display:var(--font-core);
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  /* Size scale — 1.25 ratio, hand-corrected at the small end */
+  --fs-11:11px;--fs-12:12px;--fs-13:13px;--fs-14:14px;--fs-16:16px;--fs-18:18px;
+  --fs-20:20px;--fs-24:24px;--fs-30:30px;--fs-38:38px;--fs-48:48px;--fs-60:60px;--fs-76:76px;
+
+  --weight-regular:400;--weight-medium:500;--weight-semibold:600;
+  --weight-bold:700;--weight-black:800;
+
+  --leading-tight:1.02;
+  --leading-display:1.08;
+  --leading-snug:1.25;
+  --leading-normal:1.5;
+  --leading-relaxed:1.62;
+
+  --tracking-tighter:-0.03em;
+  --tracking-tight:-0.02em;
+  --tracking-snug:-0.011em;
+  --tracking-normal:0;
+  --tracking-wide:0.03em;
+  --tracking-caps:0.11em;
+
+  /* Composed roles — what components should reach for */
+  --type-display-1:var(--weight-medium) var(--fs-76)/var(--leading-tight) var(--font-core);
+  --type-display-2:var(--weight-medium) var(--fs-60)/var(--leading-tight) var(--font-core);
+  --type-display-3:var(--weight-medium) var(--fs-48)/var(--leading-display) var(--font-core);
+  --type-heading-1:var(--weight-medium) var(--fs-38)/var(--leading-display) var(--font-core);
+  --type-heading-2:var(--weight-medium) var(--fs-24)/var(--leading-snug) var(--font-core);
+  --type-heading-3:var(--weight-semibold) var(--fs-18)/var(--leading-snug) var(--font-core);
+  --type-heading-4:var(--weight-semibold) var(--fs-16)/var(--leading-snug) var(--font-core);
+  --type-body-lg:var(--weight-regular) var(--fs-18)/var(--leading-relaxed) var(--font-core);
+  --type-body:var(--weight-regular) var(--fs-16)/var(--leading-normal) var(--font-core);
+  --type-body-sm:var(--weight-regular) var(--fs-14)/var(--leading-normal) var(--font-core);
+  --type-ui:var(--weight-medium) var(--fs-14)/1.2 var(--font-core);
+  --type-ui-sm:var(--weight-medium) var(--fs-13)/1.2 var(--font-core);
+  --type-eyebrow:var(--weight-medium) var(--fs-11)/1.2 var(--font-mono);
+  --type-mono:var(--weight-regular) var(--fs-13)/1.5 var(--font-mono);
+  --type-mono-sm:var(--weight-regular) var(--fs-12)/1.4 var(--font-mono);
+  --type-figure:var(--weight-medium) var(--fs-38)/1 var(--font-mono);
+  --type-caption:var(--weight-regular) var(--fs-12)/var(--leading-normal) var(--font-core);
+
+  --measure-prose:68ch;
+  --measure-narrow:48ch;
+  --measure-lead:36ch;
+}

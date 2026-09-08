@@ -1,0 +1,125 @@
+/* ── Theo Wallace · Color ──────────────────────────────────────────────
+   One accent (deep green), one neutral ramp with a faint green-grey cast so
+   greys and accent belong to the same family. Base ramps are literal values;
+   components must only ever reference the semantic aliases below them. */
+
+:root{
+  /* Neutral — slightly cool/green-cast greys */
+  --n-0:#FFFFFF;--n-25:#FAFBFA;--n-50:#F5F6F5;--n-100:#EDEEED;--n-200:#E1E3E2;
+  --n-300:#CDD0CE;--n-400:#A3A8A5;--n-500:#737875;--n-600:#4E5350;
+  --n-700:#2F3331;--n-800:#1B1E1D;--n-900:#101211;
+
+  /* Green — the single accent */
+  --green-50:#EDF5F1;--green-100:#D6E8E0;--green-200:#AACEC0;
+  --green-300:#6FAD97;--green-400:#2C7F67;--green-500:#0E5C4A;
+  --green-600:#0A4A3B;--green-700:#07362B;
+
+  /* Semantic hues — status only, never decorative */
+  --amber-100:#F6EDD6;--amber-500:#8A6510;--amber-600:#6E5009;
+  --red-100:#F7E3E1;--red-500:#A3312A;--red-600:#842621;
+  --blue-100:#E0E8F0;--blue-500:#2B5677;--blue-600:#20425C;
+
+  /* ── Semantic aliases · light ── */
+  --bg-page:var(--n-25);
+  --bg-surface:var(--n-0);
+  --bg-raised:var(--n-0);
+  --bg-sunken:var(--n-50);
+  --bg-muted:var(--n-100);
+  --bg-inverse:var(--n-900);
+
+  --text-heading:var(--n-900);
+  --text-body:var(--n-700);
+  --text-muted:var(--n-600);
+  --text-subtle:var(--n-500);
+  --text-inverse:var(--n-25);
+  --text-on-accent:#FFFFFF;
+  --text-link:var(--green-500);
+  --text-link-hover:var(--green-600);
+
+  --border-subtle:var(--n-200);
+  --border-default:var(--n-300);
+  --border-strong:var(--n-400);
+  --border-inverse:#333937;
+
+  --accent:var(--green-500);
+  --accent-hover:var(--green-600);
+  --accent-press:var(--green-700);
+  --accent-soft:var(--green-50);
+  --accent-soft-border:var(--green-100);
+  --accent-on-soft:var(--green-600);
+  --accent-contrast-text:#FFFFFF;
+
+  --focus-ring:var(--green-400);
+
+  /* Action — primary controls are INK, not green. Green is reserved for
+     links, focus, rules and small marks so it never floods the page. */
+  --action:var(--n-900);
+  --action-hover:var(--n-800);
+  --action-press:#000000;
+  --action-contrast-text:var(--n-0);
+
+  --status-success:var(--green-500);--status-success-soft:var(--green-50);
+  --status-warning:var(--amber-500);--status-warning-soft:var(--amber-100);
+  --status-danger:var(--red-500);--status-danger-soft:var(--red-100);
+  --status-info:var(--blue-500);--status-info-soft:var(--blue-100);
+
+  --overlay-scrim:rgba(16,18,17,.46);
+  --hairline:1px solid var(--border-subtle);
+  --hairline-strong:1px solid var(--border-default);
+
+  /* Blueprint ground — a faint dotted grid sits behind the whole page */
+  --grid-line:var(--n-200);
+  --grid-dot:#DFE2E0;
+  --grid-size:26px;
+  --grid-dot-size:1px;
+}
+
+/* ── Semantic aliases · dark ──
+   Not an inversion. Grounds are near-black green-grey, the accent lifts three
+   steps to stay legible on dark, borders become low-contrast light. */
+[data-theme="dark"]{
+  --bg-page:#0C0E0D;
+  --bg-surface:#131615;
+  --bg-raised:#191D1C;
+  --bg-sunken:#090B0A;
+  --bg-muted:#202523;
+  --bg-inverse:var(--n-25);
+
+  --text-heading:#F3F5F4;
+  --text-body:#CDD2D0;
+  --text-muted:#9AA09D;
+  --text-subtle:#767C79;
+  --text-inverse:var(--n-900);
+  --text-on-accent:#04211A;
+  --text-link:var(--green-300);
+  --text-link-hover:var(--green-200);
+
+  --border-subtle:#232827;
+  --border-default:#323836;
+  --border-strong:#4A514E;
+  --border-inverse:var(--n-300);
+
+  --accent:var(--green-300);
+  --accent-hover:var(--green-200);
+  --accent-press:var(--green-400);
+  --accent-soft:#0F211B;
+  --accent-soft-border:#1B3A31;
+  --accent-on-soft:var(--green-200);
+  --accent-contrast-text:#04211A;
+
+  --focus-ring:var(--green-300);
+
+  --action:var(--n-25);
+  --action-hover:var(--n-0);
+  --action-press:var(--n-200);
+  --action-contrast-text:var(--n-900);
+
+  --status-success:var(--green-300);--status-success-soft:#0F211B;
+  --status-warning:#D4AC5C;--status-warning-soft:#2A2113;
+  --status-danger:#E08A81;--status-danger-soft:#2C1917;
+  --status-info:#8AB0CC;--status-info-soft:#16232D;
+
+  --overlay-scrim:rgba(3,5,4,.64);
+  --grid-line:#232827;
+  --grid-dot:#222725;
+}

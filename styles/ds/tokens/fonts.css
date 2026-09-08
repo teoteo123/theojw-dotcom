@@ -1,0 +1,9 @@
+/* Theo Wallace — webfonts.
+   SUBSTITUTION NOTE: no font binaries were available from the source repo, so both
+   families are Google Fonts served from the Google CDN.
+   Schibsted Grotesk — display + UI + body (variable 400–900, plus italics)
+   IBM Plex Mono     — eyebrows, metadata, tabular numerals, code
+   If licensed originals arrive, drop .woff2 files in assets/fonts/ and replace the
+   @import below with local @font-face rules — nothing else in the system changes. */
+
+@import url("https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
