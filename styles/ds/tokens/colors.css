@@ -66,12 +66,6 @@
   --overlay-scrim:rgba(16,18,17,.46);
   --hairline:1px solid var(--border-subtle);
   --hairline-strong:1px solid var(--border-default);
-
-  /* Blueprint ground — a faint dotted grid sits behind the whole page */
-  --grid-line:var(--n-200);
-  --grid-dot:#DFE2E0;
-  --grid-size:26px;
-  --grid-dot-size:1px;
 }
 
 /* ── Semantic aliases · dark ──
@@ -120,6 +114,4 @@
   --status-info:#8AB0CC;--status-info-soft:#16232D;
 
   --overlay-scrim:rgba(3,5,4,.64);
-  --grid-line:#232827;
-  --grid-dot:#222725;
 }

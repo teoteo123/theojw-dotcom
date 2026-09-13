@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ds/Button";
 import { IconButton } from "@/components/ds/IconButton";
 import { NAV } from "@/data/site";
@@ -13,13 +13,31 @@ export function Header() {
   const { theme, toggle } = useTheme();
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
   return (
-    <header className="hdr">
+    <header className={"hdr" + (open ? " hdr--open" : "")}>
       <div className="wrap hdr__in">
         <Link className="hdr__mark" href="/" onClick={() => setOpen(false)}>
           Theo&nbsp;Wallace
         </Link>
-        <nav className="hdr__nav">
+        <nav className="hdr__nav" aria-label="Primary">
           {NAV.filter((n) => n.href !== "/").map((n) => (
             <Link
               key={n.href}
@@ -52,19 +70,26 @@ export function Header() {
       </div>
 
       {open ? (
-        <div className="mnav">
-          <div className="mnav__scrim" onClick={() => setOpen(false)} />
-          <div className="mnav__panel">
-            {NAV.map((n) => (
-              <Link key={n.href} className="mnav__link" href={n.href} onClick={() => setOpen(false)}>
-                {n.label}
+        <div className="mnav" role="dialog" aria-modal="true" aria-label="Site menu">
+          <nav className="mnav__nav" aria-label="Mobile">
+            {NAV.map((n, i) => (
+              <Link
+                key={n.href}
+                href={n.href}
+                className={"mnav__link" + (pathname === n.href ? " mnav__link--on" : "")}
+                style={{ animationDelay: `${40 + i * 35}ms` }}
+                onClick={() => setOpen(false)}
+              >
+                <span className="mnav__label">{n.label}</span>
+                {pathname === n.href ? <span className="mnav__here">Here</span> : null}
               </Link>
             ))}
-            <div className="mnav__cta">
-              <Button block size="lg" iconRight="arrow-right" href="/contact" onClick={() => setOpen(false)}>
-                Book a call
-              </Button>
-            </div>
+          </nav>
+          <div className="mnav__foot">
+            <Button block size="lg" iconRight="arrow-right" href="/contact" onClick={() => setOpen(false)}>
+              Book a call
+            </Button>
+            <p className="mnav__note">Thirty minutes. No deck, no obligation.</p>
           </div>
         </div>
       ) : null}

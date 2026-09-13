@@ -7,25 +7,22 @@ html{-webkit-text-size-adjust:100%}
 
 body{
   margin:0;
-  /* Blueprint ground: a faint dotted grid behind everything. It is a texture,
-     not a decoration — never raise its contrast to make it visible. */
   background-color:var(--bg-page);
-  background-image:radial-gradient(var(--grid-dot) var(--grid-dot-size),transparent var(--grid-dot-size));
-  background-size:var(--grid-size) var(--grid-size);
-  background-position:-1px -1px;
   color:var(--text-body);
   font:var(--type-body);
   letter-spacing:var(--tracking-normal);
+  font-optical-sizing:auto;
   text-wrap:pretty;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
+  transition:background-color var(--dur-slow) var(--ease-in-out),color var(--dur-slow) var(--ease-in-out);
 }
 
-h1,h2,h3,h4,h5,h6{margin:0;color:var(--text-heading);text-wrap:balance}
-h1{font:var(--type-display-3);letter-spacing:var(--tracking-tight)}
-h2{font:var(--type-heading-1);letter-spacing:var(--tracking-snug)}
-h3{font:var(--type-heading-2)}
-h4,h5,h6{font:var(--type-heading-3)}
+h1,h2,h3,h4,h5,h6{margin:0;color:var(--text-heading);text-wrap:balance;font-optical-sizing:auto}
+h1{font:var(--type-display-3);letter-spacing:var(--track-display)}
+h2{font:var(--type-heading-1);letter-spacing:var(--track-heading)}
+h3{font:var(--type-heading-2);letter-spacing:var(--track-heading)}
+h4,h5,h6{font:var(--type-heading-3);letter-spacing:var(--track-ui)}
 
 p{margin:0 0 var(--space-6);max-width:var(--measure-prose)}
 p:last-child{margin-bottom:0}
@@ -66,7 +63,32 @@ button,input,select,textarea{font:inherit;color:inherit}
 :where(button,[role="button"],a,input,select,textarea,summary):focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
 
 @media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  *,*::before,*::after{
+    animation-duration:200ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:200ms!important;
+    scroll-behavior:auto!important;
+  }
+  .tw-dialog__panel,.mnav,.tw-toast{
+    animation-name:tw-fade!important;
+    transform:none!important;
+  }
+  .mnav__link{opacity:1!important;animation:none!important;transform:none!important}
+}
+
+@media (prefers-reduced-transparency:reduce){
+  .hdr,.tw-dialog__panel{
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+    background:var(--bg-surface)!important;
+  }
+}
+
+@media (prefers-contrast:more){
+  .hdr,.hdr--open{
+    background:var(--bg-surface)!important;
+    border-bottom:1px solid var(--border-strong);
+  }
 }
 
 /* Two structural helpers the marketing surfaces rely on */

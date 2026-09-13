@@ -28,10 +28,13 @@ export function Select({
   placeholder,
   id,
   className = "",
+  value,
+  defaultValue,
   ...rest
 }: SelectProps) {
   const autoId = useId();
   const fid = id || autoId;
+  const isControlled = value !== undefined;
   return (
     <div className={"tw-field " + className}>
       {label ? (
@@ -46,7 +49,8 @@ export function Select({
           className={["tw-control", "tw-control--" + size, error ? "tw-control--invalid" : ""].filter(Boolean).join(" ")}
           aria-invalid={error ? "true" : undefined}
           required={required}
-          defaultValue={placeholder ? "" : undefined}
+          value={isControlled ? value : undefined}
+          defaultValue={!isControlled ? (defaultValue ?? (placeholder ? "" : undefined)) : undefined}
           {...rest}
         >
           {placeholder ? (

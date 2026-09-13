@@ -1,4 +1,4 @@
-/* The five services, verbatim from the Theo Wallace design system brief. */
+/* The five services. Stack lists reflect tools Theo actually uses. */
 export interface Service {
   key: string;
   label: string;
@@ -25,7 +25,7 @@ export const SERVICES: Service[] = [
     detail:
       "A measurement plan first, then a clean GA4 and GTM implementation, documented and handed to your team.",
     deliverables: ["Measurement plan", "GA4 property setup", "GTM container and events", "Written handoff doc"],
-    stack: ["GA4", "Tag Manager", "Looker Studio"],
+    stack: ["GA4", "Tag Manager"],
   },
   {
     key: "dashboards",
@@ -34,7 +34,7 @@ export const SERVICES: Service[] = [
     detail:
       "The numbers you actually run the business on, in one place, refreshed from the systems you already use.",
     deliverables: ["Metric definitions", "Live data connections", "Dashboard build", "Access and permissions"],
-    stack: ["Postgres", "BigQuery", "Looker Studio", "REST APIs"],
+    stack: ["Next.js", "Postgres", "REST APIs"],
   },
   {
     key: "cms",
@@ -43,7 +43,7 @@ export const SERVICES: Service[] = [
     detail:
       "Editable pages with guardrails, so publishing a post or changing a headline never needs a deploy or a phone call.",
     deliverables: ["Content model", "Editor roles", "Preview and publish flow", "Team walkthrough"],
-    stack: ["Sanity", "Payload", "WordPress"],
+    stack: ["Sanity", "Payload"],
   },
   {
     key: "api",

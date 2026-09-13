@@ -11,7 +11,10 @@
   --shadow-hairline:inset 0 0 0 1px var(--border-subtle);
   --shadow-focus:0 0 0 3px color-mix(in oklab,var(--focus-ring) 24%,transparent);
 
-  --blur-veil:saturate(150%) blur(12px);
+  --blur-veil:saturate(180%) blur(20px);
+  --blur-material:saturate(180%) blur(28px);
+  --material-fill:color-mix(in oklab,var(--bg-page) 72%,transparent);
+  --material-edge:color-mix(in oklab,var(--bg-surface) 55%,transparent);
 }
 
 [data-theme="dark"]{
@@ -19,4 +22,7 @@
   --shadow-2:0 1px 2px rgba(0,0,0,.38),0 4px 10px -6px rgba(0,0,0,.5);
   --shadow-3:0 2px 4px rgba(0,0,0,.42),0 12px 28px -12px rgba(0,0,0,.6);
   --shadow-4:0 4px 8px rgba(0,0,0,.46),0 28px 60px -20px rgba(0,0,0,.7);
+
+  --material-fill:color-mix(in oklab,var(--bg-page) 78%,transparent);
+  --material-edge:color-mix(in oklab,var(--border-subtle) 70%,transparent);
 }
