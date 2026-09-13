@@ -37,6 +37,12 @@
   --type-heading-2:var(--weight-medium) var(--fs-24)/var(--leading-snug) var(--font-core);
   --type-heading-3:var(--weight-semibold) var(--fs-18)/var(--leading-snug) var(--font-core);
   --type-heading-4:var(--weight-semibold) var(--fs-16)/var(--leading-snug) var(--font-core);
+
+  /* Size-specific tracking — tighten as type grows (WWDC typography) */
+  --track-display:var(--tracking-tighter);
+  --track-heading:var(--tracking-tight);
+  --track-body:var(--tracking-normal);
+  --track-ui:var(--tracking-snug);
   --type-body-lg:var(--weight-regular) var(--fs-18)/var(--leading-relaxed) var(--font-core);
   --type-body:var(--weight-regular) var(--fs-16)/var(--leading-normal) var(--font-core);
   --type-body-sm:var(--weight-regular) var(--fs-14)/var(--leading-normal) var(--font-core);

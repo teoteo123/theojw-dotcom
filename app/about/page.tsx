@@ -5,9 +5,17 @@ import { Tag } from "@/components/ds/Tag";
 import { Stat } from "@/components/ds/Stat";
 import { SectionHead } from "@/components/site/SectionHead";
 import { Placeholder } from "@/components/site/Placeholder";
+import { JsonLd } from "@/components/site/JsonLd";
 import { EXPERIENCE, SKILLS } from "@/data/projects";
+import { PERSON_JSON_LD } from "@/data/site";
+import { pageMeta } from "@/lib/metadata";
 
-export const metadata: Metadata = { title: "About | Theo Wallace" };
+export const metadata: Metadata = pageMeta({
+  title: "About",
+  description:
+    "Software engineer and independent consultant. Sites, dashboards, analytics and integrations for small and growing businesses.",
+  path: "/about",
+});
 
 const PRINCIPLES = [
   ["You own everything", "Code, hosting, analytics and CMS accounts are in your name from the first day, not mine."],
@@ -22,6 +30,7 @@ const PRINCIPLES = [
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={PERSON_JSON_LD} />
       <section className="wrap hero" style={{ paddingBottom: "var(--space-11)" }}>
         <div className="shead__k">About</div>
         <h1 className="hero__h1">A software engineer who still builds on the side.</h1>

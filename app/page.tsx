@@ -1,11 +1,22 @@
+import type { Metadata } from "next";
 import { Button } from "@/components/ds/Button";
 import { Badge } from "@/components/ds/Badge";
 import { Card } from "@/components/ds/Card";
 import { Stat } from "@/components/ds/Stat";
 import { Tag } from "@/components/ds/Tag";
 import { SectionHead } from "@/components/site/SectionHead";
+import { JsonLd } from "@/components/site/JsonLd";
 import { SERVICES } from "@/data/services";
 import { PROJECTS } from "@/data/projects";
+import { PERSON_JSON_LD, SITE_DESCRIPTION, SITE_NAME } from "@/data/site";
+import { pageMeta } from "@/lib/metadata";
+
+export const metadata: Metadata = pageMeta({
+  title: SITE_NAME,
+  absoluteTitle: SITE_NAME,
+  description: SITE_DESCRIPTION,
+  path: "/",
+});
 
 const PROCESS = [
   ["01", "Scope", "A call, then a written scope with a fixed price and a date. No discovery invoice."],
@@ -16,6 +27,7 @@ const PROCESS = [
 export default function Home() {
   return (
     <>
+      <JsonLd data={PERSON_JSON_LD} />
       <section className="wrap hero">
         <Badge tone="success" dot>
           Available for new work

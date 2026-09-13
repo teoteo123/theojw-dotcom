@@ -1,13 +1,13 @@
 /* ── Theo Wallace · Component styles ──────────────────────────────────
    Every rule here is consumed by a React component in components/ds/*.
    Values come from tokens only — no literal colors, sizes, or easings.
-   Interaction model: hover = one step darker / a surface tint, press = one
-   more step plus a 1px downward nudge, focus = 2px accent outline offset 2px. */
+   Interaction model: hover = one step darker / a surface tint, press =
+   scale(var(--press-scale)) on pointer-down, focus = 2px accent outline. */
 
 /* ── Button ───────────────────────────────────────────────────────── */
-.tw-btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--control-gap);border:1px solid transparent;border-radius:var(--radius-control);font:var(--type-ui);letter-spacing:var(--tracking-snug);text-decoration:none;cursor:pointer;white-space:nowrap;transition:var(--transition-control);-webkit-appearance:none;appearance:none}
+.tw-btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--control-gap);border:1px solid transparent;border-radius:var(--radius-control);font:var(--type-ui);letter-spacing:var(--track-ui);text-decoration:none;cursor:pointer;white-space:nowrap;transition:var(--transition-control);-webkit-appearance:none;appearance:none}
 .tw-btn:hover{text-decoration:none}
-.tw-btn:active{transform:translateY(1px)}
+.tw-btn:active{transform:scale(var(--press-scale))}
 .tw-btn:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
 .tw-btn[disabled],.tw-btn[aria-disabled="true"]{cursor:not-allowed;opacity:.42;transform:none}
 
@@ -45,7 +45,7 @@
 /* ── IconButton ───────────────────────────────────────────────────── */
 .tw-iconbtn{display:inline-flex;align-items:center;justify-content:center;border:1px solid transparent;border-radius:var(--radius-control);background:transparent;color:var(--text-muted);cursor:pointer;transition:var(--transition-control)}
 .tw-iconbtn:hover{background:var(--bg-sunken);color:var(--text-heading)}
-.tw-iconbtn:active{transform:translateY(1px)}
+.tw-iconbtn:active{transform:scale(var(--press-scale))}
 .tw-iconbtn:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
 .tw-iconbtn[disabled]{cursor:not-allowed;opacity:.42}
 .tw-iconbtn--sm{width:var(--control-h-sm);height:var(--control-h-sm)}
@@ -72,7 +72,7 @@
 .tw-card--accent{background:var(--accent-soft);border-color:var(--accent-soft-border)}
 .tw-card--interactive{cursor:pointer;text-decoration:none}
 .tw-card--interactive:hover{border-color:var(--border-strong);box-shadow:var(--shadow-2)}
-.tw-card--interactive:active{transform:translateY(1px)}
+.tw-card--interactive:active{transform:scale(var(--press-scale))}
 .tw-card--interactive:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
 .tw-card__eyebrow{font:var(--type-eyebrow);font-weight:var(--weight-medium);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--text-subtle);margin-bottom:var(--space-5)}
 .tw-card__title{font:var(--type-heading-3);color:var(--text-heading);margin:0 0 var(--space-4)}
@@ -156,6 +156,8 @@
 .tw-switch__track--on{background:var(--accent)}
 .tw-switch__thumb{position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:var(--radius-pill);background:var(--n-0);box-shadow:var(--shadow-1);transition:transform var(--dur-base) var(--ease-out)}
 .tw-switch__track--on .tw-switch__thumb{transform:translateX(14px)}
+.tw-switch:active .tw-switch__thumb{transform:scale(.92)}
+.tw-switch:active .tw-switch__track--on .tw-switch__thumb{transform:translateX(14px) scale(.92)}
 .tw-switch input:focus-visible+.tw-switch__track{outline:2px solid var(--focus-ring);outline-offset:2px}
 
 /* ── Tabs ─────────────────────────────────────────────────────────── */
@@ -175,15 +177,26 @@
 /* ── Dialog ───────────────────────────────────────────────────────── */
 .tw-dialog{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:var(--space-8)}
 .tw-dialog__scrim{position:absolute;inset:0;background:var(--overlay-scrim);animation:tw-fade var(--dur-base) var(--ease-out)}
-.tw-dialog__panel{position:relative;width:100%;max-width:520px;background:var(--bg-raised);border:1px solid var(--border-subtle);border-radius:var(--radius-surface);box-shadow:var(--shadow-4);animation:tw-rise var(--dur-slow) var(--ease-entrance)}
+.tw-dialog__panel{
+  position:relative;width:100%;max-width:520px;
+  background:var(--material-fill);
+  backdrop-filter:var(--blur-material);
+  -webkit-backdrop-filter:var(--blur-material);
+  border:1px solid var(--material-edge);
+  border-radius:var(--radius-surface);
+  box-shadow:var(--shadow-4);
+  transform-origin:center center;
+  animation:tw-materialize var(--dur-reveal) var(--ease-entrance);
+}
 .tw-dialog__panel--wide{max-width:760px}
 .tw-dialog__head{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-8);padding:var(--space-8) var(--space-8) var(--space-6)}
-.tw-dialog__title{font:var(--type-heading-2);letter-spacing:var(--tracking-snug);color:var(--text-heading)}
+.tw-dialog__title{font:var(--type-heading-2);letter-spacing:var(--track-heading);color:var(--text-heading)}
 .tw-dialog__desc{margin-top:var(--space-4);font:var(--type-body-sm);color:var(--text-muted)}
 .tw-dialog__body{padding:0 var(--space-8) var(--space-8)}
 .tw-dialog__foot{display:flex;justify-content:flex-end;gap:var(--space-5);padding:var(--space-6) var(--space-8);border-top:var(--hairline)}
 @keyframes tw-fade{from{opacity:0}to{opacity:1}}
 @keyframes tw-rise{from{opacity:0;transform:translateY(var(--reveal-distance))}to{opacity:1;transform:none}}
+@keyframes tw-materialize{from{opacity:0;transform:translateY(6px) scale(.985);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
 
 /* ── Toast ────────────────────────────────────────────────────────── */
 .tw-toast{display:flex;align-items:flex-start;gap:var(--space-5);min-width:280px;max-width:420px;padding:var(--space-6);background:var(--bg-inverse);color:var(--text-inverse);border-radius:var(--radius-card);box-shadow:var(--shadow-3);animation:tw-rise var(--dur-base) var(--ease-out)}

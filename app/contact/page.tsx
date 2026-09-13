@@ -3,181 +3,171 @@
 import { useState, FormEvent } from "react";
 import { Card } from "@/components/ds/Card";
 import { Badge } from "@/components/ds/Badge";
-import { Icon } from "@/components/ds/Icon";
 import { Input } from "@/components/ds/Input";
 import { Textarea } from "@/components/ds/Textarea";
-import { Select } from "@/components/ds/Select";
-import { Checkbox } from "@/components/ds/Checkbox";
-import { Radio } from "@/components/ds/Radio";
-import { Switch } from "@/components/ds/Switch";
-import { Dialog } from "@/components/ds/Dialog";
 import { Toast } from "@/components/ds/Toast";
-import { Tooltip } from "@/components/ds/Tooltip";
-import { IconButton } from "@/components/ds/IconButton";
 import { Button } from "@/components/ds/Button";
-import { SERVICES } from "@/data/services";
 import { CONTACT } from "@/data/site";
 
-export default function ContactPage() {
-  const [engagement, setEngagement] = useState("project");
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const [confirm, setConfirm] = useState(false);
-  const [sent, setSent] = useState(false);
+type FormStatus = "idle" | "pending" | "sent";
 
-  const submit = (e: FormEvent) => {
+type FieldErrors = {
+  name?: string;
+  email?: string;
+  message?: string;
+};
+
+const MAILTO_HREF = `mailto:${CONTACT.email}?subject=${encodeURIComponent("Project enquiry")}`;
+
+function validate(fields: { name: string; email: string; message: string }): FieldErrors {
+  const next: FieldErrors = {};
+  if (!fields.name.trim()) next.name = "Add your name so I know who I am talking to.";
+  if (!fields.email.trim() || !fields.email.includes("@")) next.email = "Enter an email so I can reply.";
+  if (!fields.message.trim()) next.message = "A few sentences about what you need is enough.";
+  return next;
+}
+
+export default function ContactPage() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState<FieldErrors>({});
+  const [status, setStatus] = useState<FormStatus>("idle");
+
+  const submit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!email.includes("@")) {
-      setError("Enter an email so I can reply.");
-      return;
-    }
-    setError("");
-    setConfirm(true);
+    const next = validate({ name, email, message });
+    setErrors(next);
+    if (Object.keys(next).length > 0) return;
+
+    setStatus("pending");
+    // Idle → pending → sent. Swap this yield for a real fetch later.
+    await Promise.resolve();
+    setStatus("sent");
+    setName("");
+    setEmail("");
+    setMessage("");
   };
+
+  const pending = status === "pending";
 
   return (
     <>
       <section className="wrap hero" style={{ paddingBottom: "var(--space-11)" }}>
         <div className="shead__k">Contact</div>
         <h1 className="hero__h1">Let&apos;s talk about what you need.</h1>
-        <p className="hero__lead">I read every one of these myself and reply within one business day.</p>
+        <p className="hero__lead">I read every message myself and reply within one business day.</p>
       </section>
 
       <section className="wrap" style={{ paddingBottom: "var(--section-y)" }}>
         <div className="split">
           <div style={{ display: "grid", gap: "var(--space-8)", alignContent: "start" }}>
-            <Card variant="sunken" padding="md" title="Before you write">
-              <div style={{ display: "grid", gap: "var(--space-5)", marginTop: "var(--space-5)" }}>
-                {["What is broken or missing today", "Roughly when you need it live", "Who on your team will own it after"].map(
-                  (t) => (
-                    <div key={t} style={{ display: "flex", gap: "var(--space-5)" }}>
-                      <span style={{ color: "var(--accent)", marginTop: 2 }}>
-                        <Icon name="corner-down-right" size={15} />
-                      </span>
-                      <span>{t}</span>
-                    </div>
-                  )
-                )}
-              </div>
-            </Card>
-            <Card padding="md" title="Availability">
-              <div style={{ display: "flex", alignItems: "center", gap: "var(--space-5)", marginTop: "var(--space-5)" }}>
-                <Badge tone="success" dot>
-                  Taking new work
-                </Badge>
-                <Tooltip label="Updated weekly" placement="right">
-                  <IconButton icon="info" label="Availability info" size="sm" />
-                </Tooltip>
+            <Card padding="md" title="Prefer email?">
+              <p style={{ marginTop: "var(--space-5)", marginBottom: 0 }}>
+                Opens your mail app with my address already filled in. Same reply time either way.
+              </p>
+              <div style={{ marginTop: "var(--space-7)" }}>
+                <Button size="lg" variant="secondary" iconLeft="mail" href={MAILTO_HREF} target="_blank" rel="noopener noreferrer">
+                  Email me
+                </Button>
               </div>
               <div
                 style={{
-                  marginTop: "var(--space-6)",
+                  marginTop: "var(--space-7)",
                   display: "grid",
                   gap: "var(--space-3)",
                   font: "var(--type-mono-sm)",
                   color: "var(--text-subtle)",
                 }}
               >
-                <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+                <a href={MAILTO_HREF} target="_blank" rel="noopener noreferrer">
+                  {CONTACT.email}
+                </a>
                 <a href={CONTACT.linkedin} target="_blank" rel="noopener noreferrer">
-                  linkedin.com/in/theo-wallace
+                  LinkedIn
                 </a>
                 <a href={CONTACT.github} target="_blank" rel="noopener noreferrer">
-                  github.com/teoteo123
+                  GitHub
                 </a>
               </div>
+            </Card>
+
+            <Card variant="sunken" padding="md" title="Availability">
+              <div style={{ marginTop: "var(--space-5)" }}>
+                <Badge tone="success" dot>
+                  Taking new work
+                </Badge>
+              </div>
+              <p style={{ marginTop: "var(--space-6)", marginBottom: 0, font: "var(--type-body-sm)", color: "var(--text-muted)" }}>
+                What is broken or missing, roughly when you need it, and who will own it after is plenty to start.
+              </p>
             </Card>
           </div>
 
           <Card padding="lg">
-            <form onSubmit={submit} style={{ display: "grid", gap: "var(--space-8)" }}>
-              <div className="g2">
-                <Input label="Name" required placeholder="Your name" />
-                <Input
-                  label="Email"
-                  type="email"
-                  required
-                  placeholder="you@company.com"
-                  value={email}
-                  error={error}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="g2">
-                <Input label="Company" placeholder="Company name (optional)" />
-                <Input label="Site URL" mono placeholder="https://" hint="If you already have one" />
-              </div>
-              <Select
-                label="What do you need?"
+            <form noValidate onSubmit={submit} style={{ display: "grid", gap: "var(--space-8)" }}>
+              <Input
+                label="Name"
                 required
-                placeholder="Pick the closest match"
-                options={SERVICES.map((s) => ({ value: s.key, label: s.label })).concat([{ value: "other", label: "Not sure yet" }])}
+                autoComplete="name"
+                placeholder="Your name"
+                value={name}
+                error={errors.name}
+                disabled={pending}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }));
+                }}
               />
-              <div style={{ display: "grid", gap: "var(--space-5)" }}>
-                <div className="tw-field__label">Engagement</div>
-                <Radio
-                  name="engagement"
-                  value="project"
-                  label="One-off project"
-                  description="Fixed scope, fixed price."
-                  checked={engagement === "project"}
-                  onChange={() => setEngagement("project")}
-                />
-                <Radio
-                  name="engagement"
-                  value="retainer"
-                  label="Monthly retainer"
-                  description="Ongoing hours for changes and monitoring."
-                  checked={engagement === "retainer"}
-                  onChange={() => setEngagement("retainer")}
-                />
-              </div>
-              <Textarea label="What are you trying to build?" required rows={5} hint="A few sentences is plenty." />
-              <div style={{ display: "grid", gap: "var(--space-6)" }}>
-                <Checkbox label="Include ongoing maintenance in the quote" />
-                <Switch label="Copy me on the reply" />
-              </div>
-              <div style={{ display: "flex", gap: "var(--space-5)", alignItems: "center" }}>
-                <Button type="submit" size="lg" iconRight="arrow-right">
-                  Send it
+              <Input
+                label="Email"
+                type="email"
+                required
+                autoComplete="email"
+                placeholder="you@company.com"
+                value={email}
+                error={errors.email}
+                disabled={pending}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
+                }}
+              />
+              <Textarea
+                label="Message"
+                required
+                rows={6}
+                hint="A few sentences is plenty."
+                placeholder="What are you trying to build or fix?"
+                value={message}
+                error={errors.message}
+                disabled={pending}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                  if (errors.message) setErrors((prev) => ({ ...prev, message: undefined }));
+                }}
+              />
+              <div style={{ display: "flex", gap: "var(--space-5)", alignItems: "center", flexWrap: "wrap" }}>
+                <Button type="submit" size="lg" iconRight={pending ? undefined : "arrow-right"} disabled={pending}>
+                  {pending ? "Sending…" : "Send it"}
                 </Button>
-                <span style={{ font: "var(--type-caption)", color: "var(--text-subtle)" }}>No newsletter, no CRM sequence.</span>
+                <span style={{ font: "var(--type-caption)", color: "var(--text-subtle)" }}>
+                  No newsletter. I only use this to reply.
+                </span>
               </div>
             </form>
           </Card>
         </div>
       </section>
 
-      <Dialog
-        open={confirm}
-        onClose={() => setConfirm(false)}
-        title="Send this to Theo?"
-        description="You will get a reply within one business day."
-        footer={
-          <>
-            <Button variant="ghost" onClick={() => setConfirm(false)}>
-              Keep editing
-            </Button>
-            <Button
-              onClick={() => {
-                setConfirm(false);
-                setSent(true);
-              }}
-            >
-              Send request
-            </Button>
-          </>
-        }
-      >
-        <div style={{ font: "var(--type-body-sm)", color: "var(--text-muted)" }}>
-          Sending to <strong>{email || "your email"}</strong> as a{" "}
-          {engagement === "project" ? "one-off project" : "monthly retainer"} enquiry.
-        </div>
-      </Dialog>
-
-      {sent ? (
+      {status === "sent" ? (
         <div style={{ position: "fixed", right: "var(--space-9)", bottom: "var(--space-9)", zIndex: 70 }}>
-          <Toast tone="success" title="Request sent" message="I'll reply within one business day." onClose={() => setSent(false)} />
+          <Toast
+            tone="success"
+            title="Message sent"
+            message="I'll reply within one business day."
+            onClose={() => setStatus("idle")}
+          />
         </div>
       ) : null}
     </>

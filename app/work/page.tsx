@@ -5,8 +5,14 @@ import { Tag } from "@/components/ds/Tag";
 import { Icon } from "@/components/ds/Icon";
 import { Placeholder } from "@/components/site/Placeholder";
 import { PROJECTS } from "@/data/projects";
+import { pageMeta } from "@/lib/metadata";
 
-export const metadata: Metadata = { title: "Work | Theo Wallace" };
+export const metadata: Metadata = pageMeta({
+  title: "Work",
+  description:
+    "Selected projects: products founded, contract work, and builds from hackathons — a working sample of what I ship.",
+  path: "/work",
+});
 
 export default function WorkPage() {
   return (
